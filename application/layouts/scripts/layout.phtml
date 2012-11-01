@@ -17,8 +17,15 @@ echo $this->doctype() ?>
 	$acl = new Model_Acl(); 
 	$identity = Zend_Auth::getInstance()->getIdentity();
     $userid = $identity['id'];
-	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','showmenu') ) : ?>
-		<b><a href="/user">User</a></b>&nbsp; &nbsp;
+	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'user','showmyprofile') ) : ?>
+		<b><a href="/user/update/id/<?php echo $userid; ?>">My Profile</a></b>&nbsp; &nbsp;
+	<?php endif; ?>
+	<? if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'user','showallusers') ) : ?>
+		<b><a href="/user">Users</a></b>&nbsp; &nbsp;
+	<?php endif; ?>
+
+
+    <?if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','showmenu') ) : ?>
 		<b><a href="/website">Website</a></b>&nbsp; &nbsp;
 	<?php endif; ?>
 

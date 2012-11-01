@@ -38,10 +38,10 @@ class UserController extends Zend_Controller_Action
                 $mobile = $form->getValue('mobile');
                 $email = $form->getValue('email');
                 $datecreation = $form->getValue('datecreation');
- 
+
                 $users = new Application_Model_DbTable_Users();
                 $users->createUser($login, $password, $role, $type, $firstname, $lastname, 
-									$address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation);
+                        $address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation);
                 $this->_helper->redirector('index');
             } else {
                 $form->populate($formData);
@@ -55,47 +55,49 @@ class UserController extends Zend_Controller_Action
 
     public function updateAction()
     {
-        {
-            $form = new Application_Form_User();
-            $form->submit->setLabel('Save');
-            $this->view->form = $form;
-            if ($this->getRequest()->isPost()) {
-                $formData = $this->getRequest()->getPost();
-                if ($form->isValid($formData)) {
-                    $id = (int)$form->getValue('id');
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $userid = $identity['id'];
 
-		            $login = $form->getValue('login');
-		            $password = $form->getValue('password');
-		            $role = $form->getValue('role');
-		            $type = $form->getValue('type');
-		            $firstname = $form->getValue('firstname');
-		            $lastname = $form->getValue('lastname');
-		            $address1 = $form->getValue('address1');
-		            $address2 = $form->getValue('address2');
-		            $city = $form->getValue('city');
-		            $zipcode = $form->getValue('zipcode');
-		            $state = $form->getValue('state');
-		            $country = $form->getValue('country');
-		            $phone = $form->getValue('phone');
-		            $mobile = $form->getValue('mobile');
-		            $email = $form->getValue('email');
-		            $datecreation = $form->getValue('datecreation');
+        $form = new Application_Form_User();
+        $form->submit->setLabel('Save');
+        $this->view->form = $form;
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($form->isValid($formData)) {
+                $id = (int)$form->getValue('id');
 
-                    $users = new Application_Model_DbTable_Users();
-                    $users->updateUser($id, $login, $password, $role, $type, $firstname, $lastname, 
-										$address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation);
-                    $this->_helper->redirector('index');
-                } else {
-                    $form->populate($formData);
-                }
+                $login = $form->getValue('login');
+                $password = $form->getValue('password');
+                $role = $form->getValue('role');
+                $type = $form->getValue('type');
+                $firstname = $form->getValue('firstname');
+                $lastname = $form->getValue('lastname');
+                $address1 = $form->getValue('address1');
+                $address2 = $form->getValue('address2');
+                $city = $form->getValue('city');
+                $zipcode = $form->getValue('zipcode');
+                $state = $form->getValue('state');
+                $country = $form->getValue('country');
+                $phone = $form->getValue('phone');
+                $mobile = $form->getValue('mobile');
+                $email = $form->getValue('email');
+                $datecreation = $form->getValue('datecreation');
+
+                $users = new Application_Model_DbTable_Users();
+                $users->updateUser($id, $login, $password, $role, $type, $firstname, $lastname, 
+                        $address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation);
+                $this->_helper->redirector('index');
             } else {
-                $id = $this->_getParam('id', 0);
-                if ($id > 0) {
-                    $users = new Application_Model_DbTable_Users();
-                    $form->populate($users->readUser($id));
-                }
+                $form->populate($formData);
+            }
+        } else {
+            $id = $this->_getParam('id', 0);
+            if ($id > 0 && $id == $userid) {
+                $users = new Application_Model_DbTable_Users();
+                $form->populate($users->readUser($id));
             }
         }
+
     }
     public function deleteAction()
     {
