@@ -18,7 +18,7 @@ class Zend_View_Helper_LoggedInUser
 			$logoutUrl . '">D&eacute;connexion</a>';
 		} else {
 			$loginUrl = $this->_view->linkTo('index/login');
-			$string = '<a href="'. $loginUrl . '">Connexion</a>';
+			$string = '<a href="'. $loginUrl . '">Connexion</a> | <a href="/user/create">Register</a>';
 		}
 		return $string;
 	}
