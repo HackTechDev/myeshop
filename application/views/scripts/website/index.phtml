@@ -7,8 +7,12 @@ $this->headTitle($this->title);
 	$acl = new Model_Acl(); 
 	$identity = Zend_Auth::getInstance()->getIdentity();
     $userid = $identity['id'];
-	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','create') ) : ?>
+?>
+
 <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'create'));?>">Add new website</a></p>
+
+<?php	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','create') ) : ?>
+
 <table>
     <tr>
         <th>Id</th>

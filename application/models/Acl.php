@@ -12,6 +12,7 @@ class Model_Acl extends Zend_Acl
         $this->add(new Zend_Acl_Resource('website'));
 
         $this->allow('user', 'website', 'showmenu');
+        $this->allow('user', 'website', 'createmywebsite');
         $this->allow('user', 'user', 'showmyprofile');
         $this->allow('user', 'website', 'mywebsite');
         $this->allow('user', 'website', 'read');
