@@ -12,6 +12,9 @@ class WebsiteController extends Zend_Controller_Action
     {
         $websites = new Application_Model_DbTable_Websites();
         $this->view->websites = $websites->fetchAll();
+        //$request->getParam('user');
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $this->view->websitesByUser = $websites->getWebsiteByUser($identity['id']);
     }
 
     public function createAction()

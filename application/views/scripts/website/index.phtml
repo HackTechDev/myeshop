@@ -6,6 +6,7 @@ $this->headTitle($this->title);
 <?php 
 	$acl = new Model_Acl(); 
 	$identity = Zend_Auth::getInstance()->getIdentity();
+    $userid = $identity['id'];
 	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','create') ) : ?>
 <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'create'));?>">Add new website</a></p>
 <table>
@@ -28,4 +29,29 @@ $this->headTitle($this->title);
     </tr>
     <?php endforeach; ?>
 </table>
+<?php endif; ?>
+
+<?php 	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','mywebsite') ) : ?>
+            <?php if(count($this->websitesByUser) > 0) : ?>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Url</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($this->websitesByUser as $website) : ?>
+    <tr>
+        <td><?php echo $this->escape($website->id);?></td>
+        <td><?php echo $this->escape($website->name);?></td>
+        <td><?php echo $this->escape($website->url);?></td>
+        <td>
+            <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'update', 'id'=>$website->id));?>">Update</a>
+            <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'delete', 'id'=>$website->id));?>">Delete</a>   
+            <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'install', 'id'=>$website->id));?>">Install</a>   
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+        <?php endif; ?>
 <?php endif; ?>

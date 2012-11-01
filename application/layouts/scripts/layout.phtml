@@ -11,8 +11,18 @@ echo $this->doctype() ?>
 <div id="header" style="background-color: #EEEEEE; height: 30px;">
     <div id="header-logo" style="float: left">
         <b><a href="http://maboutiki.localhost">MaBoutiki</a></b>&nbsp; &nbsp;
+
+
+	<?php 
+	$acl = new Model_Acl(); 
+	$identity = Zend_Auth::getInstance()->getIdentity();
+    $userid = $identity['id'];
+	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','showmenu') ) : ?>
 		<b><a href="/user">User</a></b>&nbsp; &nbsp;
 		<b><a href="/website">Website</a></b>&nbsp; &nbsp;
+	<?php endif; ?>
+
+
         <?php echo $this->loggedInUser(); ?>
     </div>    
 </div>

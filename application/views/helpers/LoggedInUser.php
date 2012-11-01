@@ -14,11 +14,11 @@ class Zend_View_Helper_LoggedInUser
 			$logoutUrl = $this->_view->linkTo('index/logout');
 			$user = $auth->getIdentity();
 			$login = $this->_view->escape(ucfirst($user['login']));
-			$string = 'Connect&eacute; comme ' . $login . ' | <a href="' .
-			$logoutUrl . '">D&eacute;connexion</a>';
+			$string = 'Log as ' . $login . ' | <a href="' .
+			$logoutUrl . '">Logout</a>';
 		} else {
 			$loginUrl = $this->_view->linkTo('index/login');
-			$string = '<a href="'. $loginUrl . '">Connexion</a> | <a href="/user/create">Register</a>';
+			$string = '<a href="'. $loginUrl . '">Login</a> | <a href="/user/create">Register</a>';
 		}
 		return $string;
 	}
