@@ -2,6 +2,7 @@
 
 class WebsiteController extends Zend_Controller_Action
 {
+
     public function init()
     {
         /* Initialize action controller here */
@@ -70,6 +71,7 @@ class WebsiteController extends Zend_Controller_Action
             }
         }
     }
+
     public function deleteAction()
     {
         if ($this->getRequest()->isPost()) {
@@ -86,7 +88,16 @@ class WebsiteController extends Zend_Controller_Action
             $this->view->website = $websites->readWebsite($id);
         }
     }
+
+    public function installAction()
+    {
+        // action body
+    }
+
+
 }
+
+
 
 
 

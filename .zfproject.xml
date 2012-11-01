@@ -19,6 +19,7 @@
           <actionMethod actionName="read"/>
           <actionMethod actionName="update"/>
           <actionMethod actionName="delete"/>
+          <actionMethod actionName="install"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -185,6 +186,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Parameter">
             <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Website">
+            <viewScriptFile forActionName="install"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

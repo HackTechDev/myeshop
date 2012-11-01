@@ -22,7 +22,8 @@ $this->headTitle($this->title);
         <td><?php echo $this->escape($website->url);?></td>
         <td>
             <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'update', 'id'=>$website->id));?>">Update</a>
-            <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'delete', 'id'=>$website->id));?>">Delete</a>
+            <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'delete', 'id'=>$website->id));?>">Delete</a>   
+            <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'install', 'id'=>$website->id));?>">Install</a>   
         </td>
     </tr>
     <?php endforeach; ?>
