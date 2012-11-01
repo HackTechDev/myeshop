@@ -65,6 +65,21 @@ class Application_Model_DbTable_Users extends Zend_Db_Table_Abstract
         $this->delete('id =' . (int)$id);
     }
 
+	public function findCredentials($login, $password)
+	{
+		$select = $this->select()->where('login= ?', $login)
+			->where('password = ?', $this->hashPassword($password));
+		$row = $this->fetchRow($select);
+		if($row) {
+			return $row;
+		}
+		return false;
+	}
+
+	protected function hashPassword($pwd)
+	{
+		return md5($pwd);
+	}
 
 }
 

@@ -3,6 +3,10 @@ $this->title = "Websites";
 $this->headTitle($this->title);
 ?>
 <p>
+<?php 
+	$acl = new Model_Acl(); 
+	$identity = Zend_Auth::getInstance()->getIdentity();
+	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','create') ) : ?>
 <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'create'));?>">Add new website</a></p>
 <table>
     <tr>
@@ -23,4 +27,4 @@ $this->headTitle($this->title);
     </tr>
     <?php endforeach; ?>
 </table>
-
+<?php endif; ?>

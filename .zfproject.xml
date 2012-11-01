@@ -63,6 +63,7 @@
         <formFile formName="Extension"/>
         <formFile formName="Key"/>
         <formFile formName="Parameter"/>
+        <formFile formName="Login"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
