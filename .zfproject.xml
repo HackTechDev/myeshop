@@ -65,6 +65,7 @@
         <formFile formName="Key"/>
         <formFile formName="Parameter"/>
         <formFile formName="Login"/>
+        <formFile formName="UsersWebsites"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -79,6 +80,7 @@
           <dbTableFile dbTableName="Extensions"/>
           <dbTableFile dbTableName="Keys"/>
           <dbTableFile dbTableName="Parameters"/>
+          <dbTableFile dbTableName="UsersWebsites"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
