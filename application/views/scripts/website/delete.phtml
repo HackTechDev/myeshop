@@ -1,4 +1,16 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Website</b> and script/action name <b>delete</b></p>
+<?php
+$this->title = "Delete Website";
+$this->headTitle($this->title);
+?>
+<p>Are you sure that you want to delete
+'<?php echo $this->escape($this->website['name'])?>' identified by '<?php echo $this->escape($this->website['url']); ?>'?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+<div>
+<input type="hidden" name="id" value="<?php echo $this->website['id']; ?>" />
+<input type="submit" name="del" value="Yes" />
+<input type="submit" name="del" value="No" />
 </div>
+</form>
+
+
