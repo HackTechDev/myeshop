@@ -21,12 +21,27 @@ class UserController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
+
                 $login = $form->getValue('login');
+                $password = $form->getValue('password');
+                $role = $form->getValue('role');
+                $type = $form->getValue('type');
                 $firstname = $form->getValue('firstname');
                 $lastname = $form->getValue('lastname');
-                
+                $address1 = $form->getValue('address1');
+                $address2 = $form->getValue('address2');
+                $city = $form->getValue('city');
+                $zipcode = $form->getValue('zipcode');
+                $state = $form->getValue('state');
+                $country = $form->getValue('country');
+                $phone = $form->getValue('phone');
+                $mobile = $form->getValue('mobile');
+                $email = $form->getValue('email');
+                $datecreation = $form->getValue('datecreation');
+ 
                 $users = new Application_Model_DbTable_Users();
-                $users->createUser($login, $firstname, $lastname);
+                $users->createUser($login, $password, $role, $type, $firstname, $lastname, 
+									$address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation);
                 $this->_helper->redirector('index');
             } else {
                 $form->populate($formData);
@@ -48,11 +63,27 @@ class UserController extends Zend_Controller_Action
                 $formData = $this->getRequest()->getPost();
                 if ($form->isValid($formData)) {
                     $id = (int)$form->getValue('id');
-                    $login = $form->getValue('login');
-                    $firstname = $form->getValue('firstname');
-                    $lastname = $form->getValue('lastname');
+
+		            $login = $form->getValue('login');
+		            $password = $form->getValue('password');
+		            $role = $form->getValue('role');
+		            $type = $form->getValue('type');
+		            $firstname = $form->getValue('firstname');
+		            $lastname = $form->getValue('lastname');
+		            $address1 = $form->getValue('address1');
+		            $address2 = $form->getValue('address2');
+		            $city = $form->getValue('city');
+		            $zipcode = $form->getValue('zipcode');
+		            $state = $form->getValue('state');
+		            $country = $form->getValue('country');
+		            $phone = $form->getValue('phone');
+		            $mobile = $form->getValue('mobile');
+		            $email = $form->getValue('email');
+		            $datecreation = $form->getValue('datecreation');
+
                     $users = new Application_Model_DbTable_Users();
-                    $users->updateUser($id, $login, $firstname, $lastname);
+                    $users->updateUser($id, $login, $password, $role, $type, $firstname, $lastname, 
+										$address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation);
                     $this->_helper->redirector('index');
                 } else {
                     $form->populate($formData);

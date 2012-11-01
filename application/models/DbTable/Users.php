@@ -14,21 +14,49 @@ class Application_Model_DbTable_Users extends Zend_Db_Table_Abstract
         }
         return $row->toArray();
     }
-    public function createUser($login, $firstname, $lastname)
+    public function createUser($login, $password, $role, $type, $firstname, $lastname, 
+									$address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation)
     {
         $data = array(
-                'login' => $login,
-                'firstname' => $firstname,
-                'lastname' => $lastname,
+					'login' => $login,
+					'password' => $password,
+					'role' => $role,
+					'type' => $type,
+					'firstname' => $firstname,
+					'lastname' => $lastname,
+					'address1' => $address1,
+					'address2' => $address2,
+					'city' => $city,
+					'zipcode' => $zipcode,
+					'state' => $state,
+					'country' => $country,
+					'phone' => $phone,
+					'mobile' => $mobile,
+					'email' => $email,
+					'datecreation' => $datecreation,
                 );
         $this->insert($data);
     }
-    public function updateUser($id, $login, $firstname, $lastname)
+    public function updateUser($id, $login, $password, $role, $type, $firstname, $lastname, 
+									$address1, $address2, $city, $zipcode, $state, $country, $phone, $mobile, $email, $datecreation)
     {
         $data = array(
-                'login' => $login,
-                'firstname' => $firstname,
-                'lastname' => $lastname,
+					'login' => $login,
+					'password' => $password,
+					'role' => $role,
+					'type' => $type,
+					'firstname' => $firstname,
+					'lastname' => $lastname,
+					'address1' => $address1,
+					'address2' => $address2,
+					'city' => $city,
+					'zipcode' => $zipcode,
+					'state' => $state,
+					'country' => $country,
+					'phone' => $phone,
+					'mobile' => $mobile,
+					'email' => $email,
+					'datecreation' => $datecreation,
                 );
         $this->update($data, 'id = '. (int)$id);
     }
