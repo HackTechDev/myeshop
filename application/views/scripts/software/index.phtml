@@ -9,7 +9,7 @@ $this->headTitle($this->title);
     $userid = $identity['id'];
 ?>
 
-<a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'create'));?>">Add new software</a></p>
+<a href="<?php echo $this->url(array('controller'=>'usersoftware', 'action'=>'index'));?>">Add new software</a></p>
 
 <?php	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'software','create') ) : ?>
 
@@ -26,7 +26,7 @@ $this->headTitle($this->title);
         <td><?php echo $this->escape($software->name);?></td>
         <td><?php echo $this->escape($software->url);?></td>
         <td>
-            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'update', 'id'=>$software->id));?>">Update</a>
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'update', 'id'=>$software->id));?>">Parametize</a>
             <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'delete', 'id'=>$software->id));?>">Delete</a>   
             <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'install', 'id'=>$software->id));?>">Install</a>   
         </td>
@@ -50,7 +50,7 @@ $this->headTitle($this->title);
         <td><?php echo $this->escape($software->name);?></td>
         <td><?php echo $this->escape($software->url);?></td>
         <td>
-            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'update', 'id'=>$software->id));?>">Update</a>
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'update', 'id'=>$software->id));?>">Parametize</a>
             <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'delete', 'id'=>$software->id));?>">Delete</a>   
             <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'install', 'id'=>$software->id));?>">Install</a>   
         </td>

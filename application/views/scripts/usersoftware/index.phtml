@@ -1,0 +1,22 @@
+<br/>
+List of available software<br/>
+
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Url</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($this->softwares as $software) : ?>
+    <tr>
+        <td><?php echo $this->escape($software->id);?></td>
+        <td><?php echo $this->escape($software->name);?></td>
+        <td><?php echo $this->escape($software->url);?></td>
+        <td>
+            <a href="<?php echo $this->url(array('controller'=>'usersoftware', 'action'=>'create', 'id'=>$software->id));?>">Add this software</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
