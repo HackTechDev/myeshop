@@ -40,22 +40,19 @@ class Application_Model_DbTable_Softwares extends Zend_Db_Table_Abstract
         $this->delete('id =' . (int)$id);
     }
 
-    public function getSoftwareByUser($userid){
-        $select = $this->select()
-            ->from( array('u'  => 'Users'), array(Zend_Db_Select::SQL_WILDCARD) )
-            ->join( array('us' => 'UsersSoftwares'), 'us.userid = u.id', array(Zend_Db_Select::SQL_WILDCARD) )
-            ->join( array('s'  => 'Softwares'),     's.id = us.softwareid',     array(Zend_Db_Select::SQL_WILDCARD) )
-            ->where('u.id = ?', $userid)
-            ->setIntegrityCheck(false);
+    public function getSoftwareUsedByUser($userid){
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-        return $this->fetchAll($select);
-    }
+        $select = "SELECT us.id AS id, s.name AS name, s.url AS url FROM `UsersSoftwares` AS us INNER JOIN Softwares AS s ON s.ID = us.softwareid WHERE `userid` = " . $userid ;
+        return $db->fetchAll($select);
+   }
 
     public function getSoftwareNotUsedByUser($userid){
         $db = Zend_Db_Table::getDefaultAdapter();
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-        $select = "SELECT * from Softwares WHERE id not in ( SELECT softwareid FROM `UsersSoftwares` WHERE `userid` = " . $userid . ")";
+        $select = "SELECT * from Softwares WHERE id NOT IN ( SELECT softwareid FROM `UsersSoftwares` WHERE `userid` = " . $userid . ")";
 
         return $db->fetchAll($select);
     }

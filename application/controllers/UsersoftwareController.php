@@ -17,7 +17,8 @@ class UsersoftwareController extends Zend_Controller_Action
         // Get softwares that are not use by the current user
         $softwares = new Application_Model_DbTable_Softwares();
         //$this->view->softwares = $softwares->fetchAll();
-        $this->view->softwares = $softwares->getSoftwareNotUsedByUser($currentuserid);
+        $this->view->softwaresUsedByUser = $softwares->getSoftwareUsedByUser($currentuserid);
+        $this->view->softwaresNotUsedByUser    = $softwares->getSoftwareNotUsedByUser($currentuserid);
     }
 
     public function createAction()
@@ -30,9 +31,9 @@ class UsersoftwareController extends Zend_Controller_Action
         $softwareid = $this->_getParam('id');
 
         $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
-        $userssoftwares->createUsersSoftwares($currentuserid, $softwareid);
+        $userssoftwares->createUserSoftware($currentuserid, $softwareid);
 
-        $this->_helper->redirector('index', 'software');
+        $this->_helper->redirector('index', 'usersoftware');
     }
 
     public function readAction()
@@ -47,17 +48,25 @@ class UsersoftwareController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        // action body
+        if ($this->getRequest()->isPost()) {
+            $del = $this->getRequest()->getPost('del');
+            if ($del == 'Yes') {
+                $id = $this->getRequest()->getPost('id');
+				$userssoftwares = new Application_Model_DbTable_UsersSoftwares();
+                $userssoftwares->deleteUserSoftware($id);
+            }
+            $this->_helper->redirector('index');
+        } else {
+            $id = $this->_getParam('id', 0);
+            $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
+            $this->view->usersoftware = $userssoftwares->readUserSoftware($id);
+            $this->view->software = $userssoftwares->getSoftwareByUsersoftware($id);
+        }
     }
 
-
+    public function installAction()
+    {
+        // action body
+    }
 }
-
-
-
-
-
-
-
-
 

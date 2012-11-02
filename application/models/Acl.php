@@ -10,8 +10,11 @@ class Model_Acl extends Zend_Acl
 
         $this->add(new Zend_Acl_Resource('user'));
         $this->add(new Zend_Acl_Resource('software'));
+        $this->add(new Zend_Acl_Resource('usersoftware'));
+
 
         $this->allow('user', 'software', 'showmenu');
+        $this->allow('user', 'usersoftware', 'showmenu');
         $this->allow('user', 'software', 'createmysoftware');
         $this->allow('user', 'user', 'showmyprofile');
         $this->allow('user', 'software', 'mysoftware');
