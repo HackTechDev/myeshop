@@ -51,16 +51,13 @@ class Application_Model_DbTable_Softwares extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     }
 
-	// TODO: sql for getSoftwareNotUsedByUser
     public function getSoftwareNotUsedByUser($userid){
-        $select = $this->select()
-            ->from( array('u'  => 'Users'), array(Zend_Db_Select::SQL_WILDCARD) )
-            ->join( array('us' => 'UsersSoftwares'), 'us.userid = u.id', array(Zend_Db_Select::SQL_WILDCARD) )
-            ->join( array('s'  => 'Softwares'),     's.id = us.softwareid',     array(Zend_Db_Select::SQL_WILDCARD) )
-            ->where('u.id = ?', $userid)
-            ->setIntegrityCheck(false);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-        return $this->fetchAll($select);
+        $select = "SELECT * from Softwares WHERE id not in ( SELECT softwareid FROM `UsersSoftwares` WHERE `userid` = " . $userid . ")";
+
+        return $db->fetchAll($select);
     }
 
 }
