@@ -6,14 +6,14 @@ List of softwares used<br/>
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Url</th>
+        <th>Description</th>
         <th>&nbsp;</th>
     </tr>
     <?php foreach($this->softwaresUsedByUser as $software) : ?>
     <tr>
         <td><?php echo $this->escape($software->id);?></td>
         <td><?php echo $this->escape($software->name);?></td>
-        <td><?php echo $this->escape($software->url);?></td>
+        <td><?php echo $this->escape($software->description);?></td>
         <td>
           <!--  <a href="<?php echo $this->url(array('controller'=>'usersoftware', 'action'=>'update', 'id'=>$software->id));?>">Parametize</a> -->
             <a href="<?php echo $this->url(array('controller'=>'usersoftware', 'action'=>'delete', 'id'=>$software->id));?>">Remove</a>   
@@ -24,21 +24,21 @@ List of softwares used<br/>
 </table>
 
 <br/>
-List of available softwares<br/>
+List of available softwares not used<br/>
 <br/>
 
 <table>
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Url</th>
+        <th>Description</th>
         <th>&nbsp;</th>
     </tr>
     <?php foreach($this->softwaresNotUsedByUser as $software) : ?>
     <tr>
         <td><?php echo $this->escape($software->id);?></td>
         <td><?php echo $this->escape($software->name);?></td>
-        <td><?php echo $this->escape($software->url);?></td>
+        <td><?php echo $this->escape($software->description);?></td>
         <td>
             <a href="<?php echo $this->url(array('controller'=>'usersoftware', 'action'=>'create', 'id'=>$software->id));?>">Add this software</a>
         </td>

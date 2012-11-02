@@ -66,7 +66,10 @@ class UsersoftwareController extends Zend_Controller_Action
 
     public function installAction()
     {
-        // action body
+            $id = $this->_getParam('id', 0);
+            $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
+            $this->view->usersoftware = $userssoftwares->readUserSoftware($id);
+            $this->view->software = $userssoftwares->getSoftwareByUsersoftware($id);
     }
 }
 

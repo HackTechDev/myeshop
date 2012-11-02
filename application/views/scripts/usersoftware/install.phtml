@@ -1,4 +1,12 @@
+<?php
+$this->title = "Delete Software";
+$this->headTitle($this->title);
+$software = get_object_vars($this->software[0]);
+?>
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Usersoftware</b> and script/action name <b>install</b></p>
+	<p>Installation in progress...</b></p>
 </div>
+
+<?php echo $this->usersoftware['id'] . " " . $this->escape($software['name'])?>' identified by '<?php echo $this->escape($software['url']); ?>
+
