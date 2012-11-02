@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 02 Novembre 2012 à 19:09
+-- Généré le: Ven 02 Novembre 2012 à 21:29
 -- Version du serveur: 5.5.27
 -- Version de PHP: 5.4.7
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `Softwares` (
   `url` varchar(128) NOT NULL,
   `description` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Contenu de la table `Softwares`
@@ -98,7 +98,16 @@ CREATE TABLE IF NOT EXISTS `Softwares` (
 INSERT INTO `Softwares` (`id`, `name`, `url`, `description`) VALUES
 (2, 'SCP', 'http:/scp', 'Steam'),
 (3, 'Coucou', 'http://coucou', 'Coucou'),
-(4, 'Nekrofage', 'http://nekrofage', 'Nekrocity');
+(4, 'Nekrofage', 'http://nekrofage', 'Nekrocity'),
+(5, 'Cloud', 'http://cloud.com', 'Test'),
+(6, 'qsdfq', 'qsdaaaaa', 'qsqsd'),
+(7, 'Cloud', 'http://cloud.com', 'Cloud'),
+(8, 'Cloud', 'http://cloud.com', 'Cloud'),
+(9, 'Cloud', 'http://cloud.com', 'Cloud'),
+(10, 'Cloud', 'http://cloud.com', 'qsd'),
+(11, 'Cloun', 'http://cloud.com', 'Cloud'),
+(12, 'aze', 'aze', 'aze'),
+(13, 'Mail', 'Mail155', 'Mail2');
 
 -- --------------------------------------------------------
 
@@ -144,16 +153,20 @@ INSERT INTO `Users` (`id`, `login`, `password`, `role`, `type`, `firstname`, `la
 --
 
 CREATE TABLE IF NOT EXISTS `UsersSoftwares` (
-  `user_id` int(11) NOT NULL,
-  `software_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `softwareid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `UsersSoftwares`
 --
 
-INSERT INTO `UsersSoftwares` (`user_id`, `software_id`) VALUES
-(5, 3);
+INSERT INTO `UsersSoftwares` (`id`, `userid`, `softwareid`) VALUES
+(1, 5, 11),
+(2, 5, 12),
+(3, 5, 13);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
