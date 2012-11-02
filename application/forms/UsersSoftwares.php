@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_UsersWebsites extends Zend_Form
+class Application_Form_UsersSoftwares extends Zend_Form
 {
 
     public function init()

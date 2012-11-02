@@ -25,8 +25,8 @@ echo $this->doctype() ?>
 	<?php endif; ?>
 
 
-    <?if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'website','showmenu') ) : ?>
-		<b><a href="/website">Website</a></b>&nbsp; &nbsp;
+    <?if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'software','showmenu') ) : ?>
+		<b><a href="/software">Software</a></b>&nbsp; &nbsp;
 	<?php endif; ?>
 
 

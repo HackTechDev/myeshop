@@ -9,18 +9,18 @@ class Model_Acl extends Zend_Acl
         $this->addRole(new Zend_Acl_Role('admin'), 'user');
 
         $this->add(new Zend_Acl_Resource('user'));
-        $this->add(new Zend_Acl_Resource('website'));
+        $this->add(new Zend_Acl_Resource('software'));
 
-        $this->allow('user', 'website', 'showmenu');
-        $this->allow('user', 'website', 'createmywebsite');
+        $this->allow('user', 'software', 'showmenu');
+        $this->allow('user', 'software', 'createmysoftware');
         $this->allow('user', 'user', 'showmyprofile');
-        $this->allow('user', 'website', 'mywebsite');
-        $this->allow('user', 'website', 'read');
-        $this->allow('user', 'website', 'update');
-        $this->allow('user', 'website', 'delete');
+        $this->allow('user', 'software', 'mysoftware');
+        $this->allow('user', 'software', 'read');
+        $this->allow('user', 'software', 'update');
+        $this->allow('user', 'software', 'delete');
 
         $this->allow('admin', 'user', 'showallusers');
-        $this->allow('admin', 'website', 'create');
+        $this->allow('admin', 'software', 'create');
         $this->allow('admin', 'user', 'create');
         $this->allow('admin', 'user', 'read');
         $this->allow('admin', 'user', 'update');

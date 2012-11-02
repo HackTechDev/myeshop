@@ -1,0 +1,61 @@
+<?php
+$this->title = "Softwares";
+$this->headTitle($this->title);
+?>
+<p>
+<?php 
+	$acl = new Model_Acl(); 
+	$identity = Zend_Auth::getInstance()->getIdentity();
+    $userid = $identity['id'];
+?>
+
+<a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'create'));?>">Add new software</a></p>
+
+<?php	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'software','create') ) : ?>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Url</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($this->softwares as $software) : ?>
+    <tr>
+        <td><?php echo $this->escape($software->id);?></td>
+        <td><?php echo $this->escape($software->name);?></td>
+        <td><?php echo $this->escape($software->url);?></td>
+        <td>
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'update', 'id'=>$software->id));?>">Update</a>
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'delete', 'id'=>$software->id));?>">Delete</a>   
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'install', 'id'=>$software->id));?>">Install</a>   
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+<?php endif; ?>
+
+<?php 	if( Zend_Auth::getInstance()->hasIdentity() && $acl->isAllowed( $identity['role'] ,'software','mysoftware') ) : ?>
+            <?php if(count($this->softwaresByUser) > 0) : ?>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Url</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($this->softwaresByUser as $software) : ?>
+    <tr>
+        <td><?php echo $this->escape($software->id);?></td>
+        <td><?php echo $this->escape($software->name);?></td>
+        <td><?php echo $this->escape($software->url);?></td>
+        <td>
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'update', 'id'=>$software->id));?>">Update</a>
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'delete', 'id'=>$software->id));?>">Delete</a>   
+            <a href="<?php echo $this->url(array('controller'=>'software', 'action'=>'install', 'id'=>$software->id));?>">Install</a>   
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+        <?php endif; ?>
+<?php endif; ?>

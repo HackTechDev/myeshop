@@ -13,7 +13,7 @@
           <actionMethod actionName="logout"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
-        <controllerFile controllerName="Website">
+        <controllerFile controllerName="Software">
           <actionMethod actionName="index"/>
           <actionMethod actionName="create"/>
           <actionMethod actionName="read"/>
@@ -58,14 +58,14 @@
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
-        <formFile formName="Website"/>
+        <formFile formName="Software"/>
         <formFile formName="User"/>
         <formFile formName="Application"/>
         <formFile formName="Extension"/>
         <formFile formName="Key"/>
         <formFile formName="Parameter"/>
         <formFile formName="Login"/>
-        <formFile formName="UsersWebsites"/>
+        <formFile formName="UsersSoftwares"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -74,13 +74,13 @@
       </layoutsDirectory>
       <modelsDirectory>
         <dbTableDirectory>
-          <dbTableFile dbTableName="Websites"/>
+          <dbTableFile dbTableName="Softwares"/>
           <dbTableFile dbTableName="Users"/>
           <dbTableFile dbTableName="Applications"/>
           <dbTableFile dbTableName="Extensions"/>
           <dbTableFile dbTableName="Keys"/>
           <dbTableFile dbTableName="Parameters"/>
-          <dbTableFile dbTableName="UsersWebsites"/>
+          <dbTableFile dbTableName="UsersSoftwares"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
@@ -99,7 +99,7 @@
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="logout"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Website">
+          <viewControllerScriptsDirectory forControllerName="Software">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
@@ -117,16 +117,16 @@
           <viewControllerScriptsDirectory forControllerName="Parameter">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Website">
+          <viewControllerScriptsDirectory forControllerName="Software">
             <viewScriptFile forActionName="create"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Website">
+          <viewControllerScriptsDirectory forControllerName="Software">
             <viewScriptFile forActionName="read"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Website">
+          <viewControllerScriptsDirectory forControllerName="Software">
             <viewScriptFile forActionName="update"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Website">
+          <viewControllerScriptsDirectory forControllerName="Software">
             <viewScriptFile forActionName="delete"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
@@ -189,7 +189,7 @@
           <viewControllerScriptsDirectory forControllerName="Parameter">
             <viewScriptFile forActionName="delete"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Website">
+          <viewControllerScriptsDirectory forControllerName="Software">
             <viewScriptFile forActionName="install"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>

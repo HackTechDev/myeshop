@@ -1,6 +1,6 @@
 <?php
 
-class WebsiteController extends Zend_Controller_Action
+class SoftwareController extends Zend_Controller_Action
 {
 
     public function init()
@@ -10,16 +10,16 @@ class WebsiteController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $websites = new Application_Model_DbTable_Websites();
-        $this->view->websites = $websites->fetchAll();
+        $softwares = new Application_Model_DbTable_Softwares();
+        $this->view->softwares = $softwares->fetchAll();
         //$request->getParam('user');
         $identity = Zend_Auth::getInstance()->getIdentity();
-        $this->view->websitesByUser = $websites->getWebsiteByUser($identity['id']);
+        $this->view->softwaresByUser = $softwares->getSoftwareByUser($identity['id']);
     }
 
     public function createAction()
     {
-        $form = new Application_Form_Website();
+        $form = new Application_Form_Software();
         $form->submit->setLabel('Create');
         $this->view->form = $form;
         if ($this->getRequest()->isPost()) {
@@ -30,8 +30,8 @@ class WebsiteController extends Zend_Controller_Action
                 $url = $form->getValue('url');
                 $description = $form->getValue('description');
  
-                $websites = new Application_Model_DbTable_Websites();
-                $websites->createWebsite($name, $url, $description);
+                $softwares = new Application_Model_DbTable_Softwares();
+                $softwares->createSoftware($name, $url, $description);
                 $this->_helper->redirector('index');
             } else {
                 $form->populate($formData);
@@ -46,7 +46,7 @@ class WebsiteController extends Zend_Controller_Action
     public function updateAction()
     {
         {
-            $form = new Application_Form_Website();
+            $form = new Application_Form_Software();
             $form->submit->setLabel('Save');
             $this->view->form = $form;
             if ($this->getRequest()->isPost()) {
@@ -59,8 +59,8 @@ class WebsiteController extends Zend_Controller_Action
                 $description = $form->getValue('description');
  
 
-                    $websites = new Application_Model_DbTable_Websites();
-                    $websites->updateWebsite($id, $name, $url, $description);
+                    $softwares = new Application_Model_DbTable_Softwares();
+                    $softwares->updateSoftware($id, $name, $url, $description);
                     $this->_helper->redirector('index');
                 } else {
                     $form->populate($formData);
@@ -68,8 +68,8 @@ class WebsiteController extends Zend_Controller_Action
             } else {
                 $id = $this->_getParam('id', 0);
                 if ($id > 0) {
-                    $websites = new Application_Model_DbTable_Websites();
-                    $form->populate($websites->readWebsite($id));
+                    $softwares = new Application_Model_DbTable_Softwares();
+                    $form->populate($softwares->readSoftware($id));
                 }
             }
         }
@@ -81,14 +81,14 @@ class WebsiteController extends Zend_Controller_Action
             $del = $this->getRequest()->getPost('del');
             if ($del == 'Yes') {
                 $id = $this->getRequest()->getPost('id');
-                $websites = new Application_Model_DbTable_Websites();
-                $websites->deleteWebsite($id);
+                $softwares = new Application_Model_DbTable_Softwares();
+                $softwares->deleteSoftware($id);
             }
             $this->_helper->redirector('index');
         } else {
             $id = $this->_getParam('id', 0);
-            $websites = new Application_Model_DbTable_Websites();
-            $this->view->website = $websites->readWebsite($id);
+            $softwares = new Application_Model_DbTable_Softwares();
+            $this->view->software = $softwares->readSoftware($id);
         }
     }
 

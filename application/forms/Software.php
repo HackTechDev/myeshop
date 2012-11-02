@@ -1,11 +1,11 @@
 <?php
 
-class Application_Form_Website extends Zend_Form
+class Application_Form_Software extends Zend_Form
 {
 
     public function init()
     {
-        $this->setName('website');
+        $this->setName('software');
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
 
