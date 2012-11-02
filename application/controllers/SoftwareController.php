@@ -31,7 +31,14 @@ class SoftwareController extends Zend_Controller_Action
                 $description = $form->getValue('description');
  
                 $softwares = new Application_Model_DbTable_Softwares();
-                $softwares->createSoftware($name, $url, $description);
+                $softwareid = $softwares->createSoftware($name, $url, $description);
+
+				$identity = Zend_Auth::getInstance()->getIdentity();
+				$userid = $identity['id'];
+
+				$userssoftwares = new Application_Model_DbTable_UsersSoftwares();
+				$userssoftwares->createUsersSoftwares($userid, $softwareid);
+
                 $this->_helper->redirector('index');
             } else {
                 $form->populate($formData);
@@ -96,17 +103,5 @@ class SoftwareController extends Zend_Controller_Action
     {
         // action body
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
 

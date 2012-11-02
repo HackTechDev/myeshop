@@ -22,7 +22,7 @@ class Application_Model_DbTable_Softwares extends Zend_Db_Table_Abstract
                 'url' => $url,
                 'description' => $description,
                 );
-        $this->insert($data);
+        return $this->insert($data);
     }
 
     public function updateSoftware($id, $name, $url, $description)
@@ -43,8 +43,8 @@ class Application_Model_DbTable_Softwares extends Zend_Db_Table_Abstract
     public function getSoftwareByUser($userid){
         $select = $this->select()
             ->from( array('u'  => 'Users'), array(Zend_Db_Select::SQL_WILDCARD) )
-            ->join( array('us' => 'UsersSoftwares'), 'us.user_id = u.id', array(Zend_Db_Select::SQL_WILDCARD) )
-            ->join( array('s'  => 'Softwares'),     's.id = us.software_id',     array(Zend_Db_Select::SQL_WILDCARD) )
+            ->join( array('us' => 'UsersSoftwares'), 'us.userid = u.id', array(Zend_Db_Select::SQL_WILDCARD) )
+            ->join( array('s'  => 'Softwares'),     's.id = us.softwareid',     array(Zend_Db_Select::SQL_WILDCARD) )
             ->where('u.id = ?', $userid)
             ->setIntegrityCheck(false);
 
