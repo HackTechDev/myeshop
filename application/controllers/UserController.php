@@ -56,7 +56,8 @@ class UserController extends Zend_Controller_Action
     public function updateAction()
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
-        $userid = $identity['id'];
+        $currentuserid = $identity['id'];
+        $currentuserrole = $identity['role'];
 
         $form = new Application_Form_User();
         $form->submit->setLabel('Save');
@@ -92,12 +93,18 @@ class UserController extends Zend_Controller_Action
             }
         } else {
             $id = $this->_getParam('id', 0);
-            if ($id > 0 && $id == $userid) {
-                $users = new Application_Model_DbTable_Users();
+            $users = new Application_Model_DbTable_Users();
+            if($currentuserrole == "admin"){
                 $form->populate($users->readUser($id));
             }
+            if($currentuserrole == "user"){
+                if ($id > 0 && $id == $currentuserid) {
+                    $form->populate($users->readUser($id));
+                }else{
+                    $form->populate($users->readUser($currentuserid));
+                }
+            }
         }
-
     }
     public function deleteAction()
     {
