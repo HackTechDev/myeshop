@@ -4,7 +4,7 @@ $this->headTitle($this->title);
 $software = get_object_vars($this->software[0]);
 ?>
 <p>Are you sure that you want to delete
-'<?php echo $this->escape($software['name'])?>' identified by '<?php echo $this->escape($software['url']); ?>'?
+'<?php echo $this->escape($software['name'])?>' identified by '<?php echo $this->escape($software['description']); ?>'?
 </p>
 <form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
 <div>
