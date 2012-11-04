@@ -2,11 +2,18 @@
 $this->title = "Delete Software";
 $this->headTitle($this->title);
 $software = get_object_vars($this->software[0]);
+
+$acl = new Model_Acl(); 
+$identity = Zend_Auth::getInstance()->getIdentity();
+$userid = $identity['id'];
 ?>
 <br /><br />
 <div id="view-content">
-	<p>Installation in progress...</b></p>
+<p>
+    <?php 
+        echo "Installation '". $identity['login'] . "' website with software #" . $this->usersoftware['id'] . " named '" . $this->escape($software['name']) . "'" ; 
+    ?>
+</p>
 </div>
 
-<?php echo $this->usersoftware['id'] . " " . $this->escape($software['name'])?>' identified by '<?php echo $this->escape($software['url']); ?>
 
