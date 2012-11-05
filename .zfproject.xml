@@ -63,6 +63,7 @@
           <actionMethod actionName="update"/>
           <actionMethod actionName="delete"/>
           <actionMethod actionName="install"/>
+          <actionMethod actionName="progress"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -217,6 +218,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Usersoftware">
             <viewScriptFile forActionName="install"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Usersoftware">
+            <viewScriptFile forActionName="progress"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

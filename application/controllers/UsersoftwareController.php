@@ -78,6 +78,7 @@ class UsersoftwareController extends Zend_Controller_Action
                 $login = $this->getRequest()->getPost('login');
                 $userid = $this->getRequest()->getPost('userid');
                 $softwareid = $this->getRequest()->getPost('softwareid');
+				 $this->_helper->redirector('progress', 'usersoftware');
             }
             $this->_helper->redirector('index');
         } else {
@@ -87,5 +88,14 @@ class UsersoftwareController extends Zend_Controller_Action
         }
 
     }
+
+    public function progressAction()
+    {
+        // action body
+    }
+
+
 }
+
+
 
