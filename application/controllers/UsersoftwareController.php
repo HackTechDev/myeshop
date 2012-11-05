@@ -70,6 +70,22 @@ class UsersoftwareController extends Zend_Controller_Action
             $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
             $this->view->usersoftware = $userssoftwares->readUserSoftware($id);
             $this->view->software = $userssoftwares->getSoftwareByUsersoftware($id);
+
+
+        if ($this->getRequest()->isPost()) {
+            $ins = $this->getRequest()->getPost('ins');
+            if ($ins == 'Yes') {
+                $login = $this->getRequest()->getPost('login');
+                $userid = $this->getRequest()->getPost('userid');
+                $softwareid = $this->getRequest()->getPost('softwareid');
+            }
+            $this->_helper->redirector('index');
+        } else {
+            $login = $this->_getParam('login', 0);
+            $userid = $this->_getParam('userid', 0);
+            $softwareid = $this->_getParam('softwareid', 0);
+        }
+
     }
 }
 
