@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 02 Novembre 2012 à 21:29
+-- Généré le: Mar 06 Novembre 2012 à 21:02
 -- Version du serveur: 5.5.27
 -- Version de PHP: 5.4.7
 
@@ -56,8 +56,6 @@ CREATE TABLE IF NOT EXISTS `Keys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `description` varchar(256) NOT NULL,
-  `application_id` int(11) NOT NULL,
-  `extension_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -69,10 +67,8 @@ CREATE TABLE IF NOT EXISTS `Keys` (
 
 CREATE TABLE IF NOT EXISTS `Parameters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `website_id` int(11) NOT NULL,
-  `application_id` int(11) NOT NULL,
-  `extension_id` int(11) NOT NULL,
-  `key_id` int(11) NOT NULL,
+  `userssoftwaresid` int(11) NOT NULL,
+  `keyid` int(11) NOT NULL,
   `value` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -96,18 +92,18 @@ CREATE TABLE IF NOT EXISTS `Softwares` (
 --
 
 INSERT INTO `Softwares` (`id`, `name`, `url`, `description`) VALUES
-(2, 'SCP', 'http:/scp', 'Steam'),
-(3, 'Coucou', 'http://coucou', 'Coucou'),
-(4, 'Nekrofage', 'http://nekrofage', 'Nekrocity'),
-(5, 'Cloud', 'http://cloud.com', 'Test'),
-(6, 'qsdfq', 'qsdaaaaa', 'qsqsd'),
-(7, 'Cloud', 'http://cloud.com', 'Cloud'),
-(8, 'Cloud', 'http://cloud.com', 'Cloud'),
+(2, 'Joomla1', 'http:/scp', 'Joomla de base'),
+(3, 'Joomla2', 'http://coucou', 'Joomla+galerie'),
+(4, 'Joomla3', 'http://nekrofage', 'Joomla+Social'),
+(5, 'Wordpress', 'http://cloud.com', 'Wordpress de base'),
+(6, 'Owncloud', 'qsdaaaaa', 'Owncloud'),
+(7, 'Publipostage', 'http://cloud.com', 'Publipostage'),
+(8, 'Email', 'http://cloud.com', 'Email'),
 (9, 'Cloud', 'http://cloud.com', 'Cloud'),
-(10, 'Cloud', 'http://cloud.com', 'qsd'),
-(11, 'Cloun', 'http://cloud.com', 'Cloud'),
-(12, 'aze', 'aze', 'aze'),
-(13, 'Mail', 'Mail155', 'Mail2');
+(10, 'Cloud', 'http://cloud.com', 'Cloud'),
+(11, 'Cloud', 'http://cloud.com', 'Cloud'),
+(12, 'Gmail', 'aze', 'Gmail'),
+(13, 'SEO', 'Mail155', 'SEO');
 
 -- --------------------------------------------------------
 
@@ -157,16 +153,18 @@ CREATE TABLE IF NOT EXISTS `UsersSoftwares` (
   `userid` int(11) DEFAULT NULL,
   `softwareid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
 -- Contenu de la table `UsersSoftwares`
 --
 
 INSERT INTO `UsersSoftwares` (`id`, `userid`, `softwareid`) VALUES
-(1, 5, 11),
-(2, 5, 12),
-(3, 5, 13);
+(14, 5, 4),
+(35, 4, 4),
+(36, 4, 10),
+(37, 5, 6),
+(38, 5, 10);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
