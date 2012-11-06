@@ -11,7 +11,7 @@ $userid = $identity['id'];
 <div id="view-content">
 <p>
     <?php 
-        echo "Installation '". $identity['login'] . "' website with software #" . $this->usersoftware['id'] . " named '" . $this->escape($software['name']) . "'" ; 
+        echo "Installation '". $identity['login'] . "' website with software #" . $software['id'] . " named '" . $this->escape($software['name']) . "'" ; 
     ?>
 </p>
 </div>
@@ -20,9 +20,7 @@ $userid = $identity['id'];
 </p>
 <form action="<?php echo $this->url(array('action'=>'install')); ?>" method="post">
 <div>
-<input type="hidden" name="login" value="<?php echo $identity['login']; ?>" />
-<input type="hidden" name="userid" value="<?php echo $userid; ?>" />
-<input type="hidden" name="usersoftwareid" value="<?php echo $this->usersoftware['id']; ?>" />
+<input type="hidden" name="softwareid" value="<?php echo $software['id']; ?>" />
 <input type="submit" name="ins" value="Yes" />
 <input type="submit" name="ins" value="No" />
 </div>

@@ -44,7 +44,7 @@ class Application_Model_DbTable_Softwares extends Zend_Db_Table_Abstract
         $db = Zend_Db_Table::getDefaultAdapter();
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-        $select = "SELECT us.id AS id, s.name AS name, s.url AS url, s.description AS description FROM `UsersSoftwares` AS us INNER JOIN Softwares AS s ON s.ID = us.softwareid WHERE `userid` = " . $userid ;
+        $select = "SELECT us.id AS id, us.softwareid AS softwareid, s.name AS name, s.url AS url, s.description AS description FROM `UsersSoftwares` AS us INNER JOIN Softwares AS s ON s.ID = us.softwareid WHERE `userid` = " . $userid ;
         return $db->fetchAll($select);
    }
 

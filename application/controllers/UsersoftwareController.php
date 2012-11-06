@@ -52,7 +52,7 @@ class UsersoftwareController extends Zend_Controller_Action
             $del = $this->getRequest()->getPost('del');
             if ($del == 'Yes') {
                 $id = $this->getRequest()->getPost('id');
-				$userssoftwares = new Application_Model_DbTable_UsersSoftwares();
+                $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
                 $userssoftwares->deleteUserSoftware($id);
             }
             $this->_helper->redirector('index');
@@ -66,36 +66,24 @@ class UsersoftwareController extends Zend_Controller_Action
 
     public function installAction()
     {
-            $id = $this->_getParam('id', 0);
-            $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
-            $this->view->usersoftware = $userssoftwares->readUserSoftware($id);
-            $this->view->software = $userssoftwares->getSoftwareByUsersoftware($id);
-
+        $id = $this->_getParam('id', 0);
+        $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
+        $this->view->usersoftware = $userssoftwares->readUserSoftware($id);
+        $this->view->software = $userssoftwares->getSoftwareByUsersoftware($id);
 
         if ($this->getRequest()->isPost()) {
             $ins = $this->getRequest()->getPost('ins');
             if ($ins == 'Yes') {
-                $login = $this->getRequest()->getPost('login');
-                $userid = $this->getRequest()->getPost('userid');
-                $softwareid = $this->getRequest()->getPost('softwareid');
-				 $this->_helper->redirector('progress', 'usersoftware');
+                $this->view->softwareid = $this->getRequest()->getPost('softwareid');
+                // Send variable to the view
+                $this->_helper->viewRenderer('progress');
             }
-            $this->_helper->redirector('index');
         } else {
-            $login = $this->_getParam('login', 0);
-            $userid = $this->_getParam('userid', 0);
             $softwareid = $this->_getParam('softwareid', 0);
         }
-
     }
 
     public function progressAction()
-    {
-        // action body
+    {   
     }
-
-
 }
-
-
-
