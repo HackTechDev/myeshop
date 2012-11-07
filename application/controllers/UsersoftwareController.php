@@ -74,10 +74,29 @@ class UsersoftwareController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $ins = $this->getRequest()->getPost('ins');
             if ($ins == 'Yes') {
+
+                $identity = Zend_Auth::getInstance()->getIdentity();
+
+                $version = 1; // Joomla application
+                $sitename = 'Mon test';
+                $user = $identity['login'];
+                $password = 'mot2passe';
+                $db = 'util22';
+                $dbprefix = 'joomla';
+                $mailfrom = 'version01@mapetiteboutique.pro';
+                $fromname = 'Ma Petite Boutique Version01';
+
+                AI_Log::write('Create user: ' . $user);
+
+                AI_Administration::createUserSite($user);
+                //AI_Administration::createSqlUser($user, $password);
+                //AI_Administration::createUserDatabase($user);
+                //AI_Administration::setPermissionUserDatabase($user, $password);
+                //AI_SoftwareManagement::installSoftware($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname);
+
                 // Send variable to the view
                 $this->view->softwareid = $this->getRequest()->getPost('softwareid');
                 $this->_helper->viewRenderer('progress');
-                AI_Log::write('Install Software #' . $this->getRequest()->getPost('softwareid'));               
             }
         } else {
             $softwareid = $this->_getParam('softwareid', 0);
