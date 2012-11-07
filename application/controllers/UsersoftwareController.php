@@ -74,9 +74,10 @@ class UsersoftwareController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $ins = $this->getRequest()->getPost('ins');
             if ($ins == 'Yes') {
-                $this->view->softwareid = $this->getRequest()->getPost('softwareid');
                 // Send variable to the view
+                $this->view->softwareid = $this->getRequest()->getPost('softwareid');
                 $this->_helper->viewRenderer('progress');
+                AI_Log::write('Install Software #' . $this->getRequest()->getPost('softwareid'));               
             }
         } else {
             $softwareid = $this->_getParam('softwareid', 0);
