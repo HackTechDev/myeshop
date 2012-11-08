@@ -25,6 +25,7 @@ $this->headTitle($this->title);
         <td>
             <a href="<?php echo $this->url(array('controller'=>'user', 'action'=>'update', 'id'=>$user->id));?>">Update</a>
             <a href="<?php echo $this->url(array('controller'=>'user', 'action'=>'delete', 'id'=>$user->id));?>">Delete</a>
+            <a href="<?php echo $this->url(array('controller'=>'website', 'action'=>'delete', 'login'=>$user->login));?>">Delete Website</a>
         </td>
     </tr>
     <?php endforeach; ?>

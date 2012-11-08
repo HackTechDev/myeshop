@@ -88,7 +88,7 @@ class UsersoftwareController extends Zend_Controller_Action
 
                 AI_Log::write('Create user: ' . $user);
 
-                AI_Administration::createUserSite($user);
+                AI_Administration::createUserSite("../../sites/" . $user);
                 //AI_Administration::createSqlUser($user, $password);
                 //AI_Administration::createUserDatabase($user);
                 //AI_Administration::setPermissionUserDatabase($user, $password);

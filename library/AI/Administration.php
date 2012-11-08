@@ -124,7 +124,6 @@ class AI_Administration
     /*
        Remove User in database	
      */
-
     public static function removeUserInDatabase($user, $password){
         
         $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
@@ -145,7 +144,6 @@ class AI_Administration
     /*
        Remove UserDatabase in database
      */
-
     public static function removeUserDatabaseInDatabase($user, $password){
         
         $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
@@ -166,7 +164,6 @@ class AI_Administration
     /*
        Create user
      */
-
     public static function createUser($user, $password){
         createUserSite($user);
         createSqlUser($user, $password);
@@ -174,19 +171,17 @@ class AI_Administration
         setPermissionUserDatabase($user, $password);
     }
 
-
     /*
        Create user site
      */
-
     public static function createUserSite($user){
-        mkdir("../../sites/" . $user);
+        mkdir($user);
     }
+
     /*
        Remove user site
      */
-
-    public static function removeUserSite($site) {	
+    public static function deleteUserSite($site) {	
         if (is_dir ($site)) {
             $dh = opendir ($site); 
         }else {     
@@ -197,7 +192,7 @@ class AI_Administration
             if ($file !== '.' && $file !== '..') { 
                 $path = $site.'/'.$file;
                 if (is_dir ($path)) {           
-                    removeUserSite($path); 
+                    deleteUserSite($path); 
                     rmdir($path);
                 }else {   
                     unlink($path);
@@ -206,10 +201,10 @@ class AI_Administration
         }
         closedir ($dh); 
     }
+
     /*
        Desactivate user site
      */
-
     public static function activateUserSite($user){
     }
 }
