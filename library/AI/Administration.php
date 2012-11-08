@@ -179,9 +179,18 @@ class AI_Administration
     }
 
     /*
-       Remove user site
+       Delete user site
      */
-    public static function deleteUserSite($site) {	
+
+    public static function deleteUserSite($usersite){
+         rmdir($usersite);       
+    }
+
+    /*
+        Delete software
+    */
+
+    public static function deleteSoftware($site) {	
         if (is_dir ($site)) {
             $dh = opendir ($site); 
         }else {     
@@ -192,7 +201,7 @@ class AI_Administration
             if ($file !== '.' && $file !== '..') { 
                 $path = $site.'/'.$file;
                 if (is_dir ($path)) {           
-                    deleteUserSite($path); 
+                    deleteSoftware($path); 
                     rmdir($path);
                 }else {   
                     unlink($path);
