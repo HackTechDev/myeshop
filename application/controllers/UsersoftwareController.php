@@ -68,7 +68,7 @@ class UsersoftwareController extends Zend_Controller_Action
                 $version = 1; // By default : Joomla application
                 $password = 'mot2passe';
                 $db = $identity['login'];
-                $dbprefix = 'joomla';
+                $dbprefix = 'joomla1';
  
 
                 // Remove the directory software 
@@ -117,7 +117,7 @@ class UsersoftwareController extends Zend_Controller_Action
                 AI_Administration::createUserDatabase($user);
                 AI_Administration::setPermissionUserDatabase($user, $password);
             
-                AI_Log::write("Install software #" . $software . " for " . $user);
+                AI_Log::write("Install software for " . $user);
                 AI_SoftwareManagement::installSoftware($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname);
 
                 // Send variable to the view

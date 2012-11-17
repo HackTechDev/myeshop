@@ -209,7 +209,7 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
        Modify configuration file
      */
     public static function modifyJoomlaConfigurationFile($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname, $sitepath){
-        $joomlaConfigurationFile = fopen("../../sites/" . $user . "/configuration.php", "a+");
+        $joomlaConfigurationFile = fopen("../../sites/" . $user . "/software". $version . "/configuration.php", "a+");
 
         $configuration  = "    public \$sitename = '" . $sitename . "';\n";
         $configuration .= "    public \$user = '" . $user . "';\n";
@@ -241,7 +241,7 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
        Insert sql request file
      */
 
-    public static function insertSqlRequestFile($user, $password){
+    public static function insertSqlRequestFile($user, $password, $version){
         $conn = new mysqli('localhost', $user, $password);
 
         if (mysqli_connect_errno()) {
@@ -259,10 +259,10 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
         // TODO: Change the call of command line mysql by the mysql php
 
         echo "Insert request file<br/>";	
-        system("../../../bin/mysql -h localhost -u " . $user . " -p" . $password . " " . $user . " < " . "../../sites/" . $user . "/bdd/requests.sql");
+        system("../../../bin/mysql -h localhost -u " . $user . " -p" . $password . " " . $user . " < " . "../../sites/" . $user . "/software" . $version . "/bdd/requests.sql");
 
-        unlink("../../sites/" . $user . "/bdd/requests.sql");  
-        rmdir("../../sites/" . $user . "/bdd/");
+        unlink("../../sites/" . $user . "/software" . $version. "/bdd/requests.sql");  
+        rmdir("../../sites/" . $user . "/software" . $version . "/bdd/");
     }
 
 
@@ -302,7 +302,7 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
         AI_SoftwareManagement::copyArchive("../../sites/templates/software" . $version . ".tbz2", "../../sites/" . $user . "/software" . $version . ".tbz2"); 
         AI_SoftwareManagement::uncompressBz2Archive($version, $user);
         AI_SoftwareManagement::modifyJoomlaConfigurationFile($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname, "/home/lesanglier/IMAUGIS/lampp/htdocs/");
-        AI_SoftwareManagement::insertSqlRequestFile($user, $password);
+        AI_SoftwareManagement::insertSqlRequestFile($user, $password, $version);
     }
 
     /*
