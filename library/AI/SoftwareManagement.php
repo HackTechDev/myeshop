@@ -306,14 +306,23 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
     }
 
     /*
+        Remove software
+    */
+
+    public static function removeSoftware($version, $sitename, $user, $password, $db, $dbprefix){
+
+    }
+
+    /*
+       Only the administrator can do that
        Delete user site
      */
 
     public static function deleteUserSite($user, $password){
         // Permission du site : 777
-        removeUserSite("../sites/" . $user);
-        rmdir("../sites/" . $user);
-        removeUserDatabase($user, $password);
+        removeUserSite("../sites/" . $user); 
+        rmdir("../sites/" . $user); 
+        removeUserDatabase($user, $password); 
         removeUserInDatabase($user, $password);
         removeUserDatabaseInDatabase($user, $password);
     }

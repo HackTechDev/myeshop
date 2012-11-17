@@ -53,6 +53,31 @@ class UsersoftwareController extends Zend_Controller_Action
             if ($del == 'Yes') {
                 $id = $this->getRequest()->getPost('id');
                 $userssoftwares = new Application_Model_DbTable_UsersSoftwares();
+                // Delete software
+
+                $identity = Zend_Auth::getInstance()->getIdentity();
+
+                $user = $identity['login'];
+                $usersoftware = $userssoftwares->readUserSoftware($id);
+                $softwareid = $usersoftware['softwareid'];                
+
+                $softwares = new Application_Model_DbTable_Softwares();
+                $softwarename = $softwares->readSoftware($softwareid);
+
+
+                $version = 1; // By default : Joomla application
+                $password = 'mot2passe';
+                $db = $identity['login'];
+                $dbprefix = 'joomla';
+ 
+
+                // Remove the directory software 
+                
+                // Remove the table software
+            
+
+
+                AI_Log::write("Delete software #" . $softwareid . " named '" . $softwarename['name'] . "' for " . $user);
                 $userssoftwares->deleteUserSoftware($id);
             }
             $this->_helper->redirector('index');
@@ -91,6 +116,8 @@ class UsersoftwareController extends Zend_Controller_Action
                 AI_Administration::createSqlUser($user, $password);
                 AI_Administration::createUserDatabase($user);
                 AI_Administration::setPermissionUserDatabase($user, $password);
+            
+                AI_Log::write("Install software #" . $software . " for " . $user);
                 AI_SoftwareManagement::installSoftware($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname);
 
                 // Send variable to the view
