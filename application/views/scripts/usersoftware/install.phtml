@@ -15,7 +15,12 @@ $userid = $identity['id'];
     ?>
 </p>
 </div>
+<?php 
+    // Check the software availability
+    // By default only the "Joomla de base #2" is available
 
+    if($software['id'] == 2) {
+?>
 <p>Are you sure that you want to install this software?
 </p>
 <form action="<?php echo $this->url(array('action'=>'install')); ?>" method="post">
@@ -25,4 +30,8 @@ $userid = $identity['id'];
 <input type="submit" name="ins" value="No" />
 </div>
 </form>
-
+<?php 
+    }else{ 
+        echo "Software not available<br/>";
+    }
+?>
