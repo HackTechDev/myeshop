@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 06 Novembre 2012 à 21:02
+-- Généré le: Sam 17 Novembre 2012 à 16:19
 -- Version du serveur: 5.5.27
 -- Version de PHP: 5.4.7
 
@@ -153,18 +153,7 @@ CREATE TABLE IF NOT EXISTS `UsersSoftwares` (
   `userid` int(11) DEFAULT NULL,
   `softwareid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
-
---
--- Contenu de la table `UsersSoftwares`
---
-
-INSERT INTO `UsersSoftwares` (`id`, `userid`, `softwareid`) VALUES
-(14, 5, 4),
-(35, 4, 4),
-(36, 4, 10),
-(37, 5, 6),
-(38, 5, 10);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
