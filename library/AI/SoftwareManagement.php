@@ -16,13 +16,13 @@ class AI_SoftwareManagement
      */
 
     public static function uncompressBz2Archive($version, $user){
-        $compressedArchive = new PharData("../sites/" . $user . "/software" . $version . ".tbz2", 0);
+        $compressedArchive = new PharData("../../sites/" . $user . "/software" . $version . ".tbz2", 0);
         $compressedArchive->decompress();
 
-        $archive = new PharData("../sites/" . $user . "/software" . $version . ".tar");
-        $archive->extractTo("../sites/" . $user . "/", null, true);
-        unlink("../sites/" . $user . "/software" . $version . ".tar"); 
-        unlink("../sites/" . $user . "/software" . $version . ".tbz2"); 
+        $archive = new PharData("../../sites/" . $user . "/software" . $version . ".tar");
+        $archive->extractTo("../../sites/" . $user . "/", null, true);
+        unlink("../../sites/" . $user . "/software" . $version . ".tar"); 
+        unlink("../../sites/" . $user . "/software" . $version . ".tbz2"); 
     }
 
     /*
@@ -194,7 +194,7 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
          * distribution is even, and randomize the start shift so it's not
          * predictable.
          */
-        $random = genRandomBytes($length + 1);
+        $random = AI_SoftwareManagement::genRandomBytes($length + 1);
         $shift = ord($random[0]);
         for ($i = 1; $i <= $length; ++$i)
         {
@@ -209,14 +209,14 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
        Modify configuration file
      */
     public static function modifyJoomlaConfigurationFile($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname, $sitepath){
-        $joomlaConfigurationFile = fopen("../sites/" . $user . "/configuration.php", "a+");
+        $joomlaConfigurationFile = fopen("../../sites/" . $user . "/configuration.php", "a+");
 
         $configuration  = "    public \$sitename = '" . $sitename . "';\n";
         $configuration .= "    public \$user = '" . $user . "';\n";
         $configuration .= "    public \$password = '" . $password . "';\n";
         $configuration .= "    public \$db = '" . $db . "';\n";
         $configuration .= "    public \$dbprefix = '" . $dbprefix . "_';\n";
-        $configuration .= "    public \$secret = '" . genRandomPassword(16) . "';\n";
+        $configuration .= "    public \$secret = '" . AI_SoftwareManagement::genRandomPassword(16) . "';\n";
         $configuration .= "    public \$mailfrom = '" . $mailfrom . "';\n";
         $configuration .= "    public \$fromname = '" . $fromname . "';\n";
         $configuration .= "    public \$log_path = '" . $sitepath . $db . "/logs';\n";
@@ -233,6 +233,7 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
        Copy archive
      */
     public static function copyArchive($from, $to){
+        echo "Copy archive from '" . $from . "' to '" . $to . "'<br/>";
         copy($from, $to);
     }
 
@@ -258,10 +259,10 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
         // TODO: Change the call of command line mysql by the mysql php
 
         echo "Insert request file<br/>";	
-        system("../../bin/mysql -h localhost -u " . $user . " -p" . $password . " " . $user . " < " . "../sites/" . $user . "/bdd/requests.sql");
+        system("../../../bin/mysql -h localhost -u " . $user . " -p" . $password . " " . $user . " < " . "../../sites/" . $user . "/bdd/requests.sql");
 
-        unlink("../sites/" . $user . "/bdd/requests.sql");  
-        rmdir("../sites/" . $user . "/bdd/");
+        unlink("../../sites/" . $user . "/bdd/requests.sql");  
+        rmdir("../../sites/" . $user . "/bdd/");
     }
 
 
@@ -293,18 +294,15 @@ Code: line 74: $registry->set('secret', JUserHelper::genRandomPassword(16));
         closedir ($dh); 
     }
 
-
-
-
     /*
        Install software
      */
 
     public static function installSoftware($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname){
-        copyArchive("./templates/software" . $version . ".tbz2", "../sites/" . $user . "/software" . $version . ".tbz2");
-        uncompressBz2Archive($version, $user);
-        modifyJoomlaConfigurationFile($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname, "/home/lesanglier/IMAUGIS/lampp/htdocs/");
-        insertSqlRequestFile($user, $password);
+        AI_SoftwareManagement::copyArchive("../../sites/templates/software" . $version . ".tbz2", "../../sites/" . $user . "/software" . $version . ".tbz2"); 
+        AI_SoftwareManagement::uncompressBz2Archive($version, $user);
+        AI_SoftwareManagement::modifyJoomlaConfigurationFile($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname, "/home/lesanglier/IMAUGIS/lampp/htdocs/");
+        AI_SoftwareManagement::insertSqlRequestFile($user, $password);
     }
 
     /*

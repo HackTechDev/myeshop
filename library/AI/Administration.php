@@ -3,26 +3,44 @@
 class AI_Administration
 {
 
-    var $adminLogin = "root";
-    var $adminPassword = "mot2passe";
-
     /*
        Create Sql user
        Only mysql admin can do that.
      */
 
     public static function createSqlUser($user, $password){
-
-        $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
+        $conn = new mysqli("localhost", "root", "mot2passe");
 
         if (mysqli_connect_errno()) {
             exit('Connection failed'. mysqli_connect_error());
         }
 
-        $sql = "CREATE USER '$user'@'localhost' IDENTIFIED BY '$password';";
+        //$sql = "use mysql;drop user '" . $user . "'@'localhost';flush privileges;CREATE USER '" . $user . "'@'localhost' IDENTIFIED BY '" . $password . "';";
+        $sql = "USE mysql;";
+        if ($conn->query($sql) === TRUE) {
+            echo "Use mysql database<br/>";
+        } else {
+            echo "Error: " . $conn->error . "<br/>";
+        }
+
+        $sql = "DROP USER '" . $user . "'@'localhost';";
+        if ($conn->query($sql) === TRUE) {
+            echo "Drop user " . $user . "<br/>";
+        } else {
+            echo "Error: " . $conn->error . "<br/>";
+        }
+
+        $sql = "FLUSH PRIVILEGES;";
+        if ($conn->query($sql) === TRUE) {
+            echo "Flush privileges<br/>";
+        } else {
+            echo "Error: " . $conn->error . "<br/>";
+        }
+
+        $sql = "CREATE USER '" . $user . "'@'localhost' IDENTIFIED BY '" . $password . "';";
 
         if ($conn->query($sql) === TRUE) {
-            echo "User in Database selected: " . $user . "<br/>";
+            echo "Create user '" . $user . "'@'localhost'<br/>";
         } else {
             echo "Error: " . $conn->error . "<br/>";
         }
@@ -35,7 +53,7 @@ class AI_Administration
 
     public static function createUserDatabase($user){
         
-        $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
+        $conn = new mysqli("localhost", "root", "mot2passe");
 
         if (mysqli_connect_errno()) {
             exit('Connection failed'. mysqli_connect_error());
@@ -57,7 +75,8 @@ class AI_Administration
 
     public static function setPermissionUserDatabase($user, $password){
         
-        $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
+
+        $conn = new mysqli("localhost", "root", "mot2passe");
 
         if (mysqli_connect_errno()) {
             exit('Connection failed'. mysqli_connect_error());
@@ -78,7 +97,8 @@ class AI_Administration
 
     public static function removeUserDatabase($user){
         
-        $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
+
+        $conn = new mysqli("localhost", "root", "mot2passe");
 
         if (mysqli_connect_errno()) {
             exit('Connection failed: '. mysqli_connect_error());
@@ -126,7 +146,8 @@ class AI_Administration
      */
     public static function removeUserInDatabase($user, $password){
         
-        $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
+
+        $conn = new mysqli("localhost", "root", "mot2passe");
 
         if (mysqli_connect_errno()) {
             exit('Connection failed: '. mysqli_connect_error());
@@ -145,8 +166,8 @@ class AI_Administration
        Remove UserDatabase in database
      */
     public static function removeUserDatabaseInDatabase($user, $password){
-        
-        $conn = new mysqli("localhost", $this->adminLogin, $this->adminPassword);
+
+        $conn = new mysqli("localhost", "root", "mot2passe");
 
         if (mysqli_connect_errno()) {
             exit('Connection failed: '. mysqli_connect_error());
@@ -175,7 +196,8 @@ class AI_Administration
        Create user site
      */
     public static function createUserSite($user){
-        mkdir($user);
+        echo "Create '$user' UserSite <br/>";
+        @mkdir($user);
     }
 
     /*
@@ -217,6 +239,5 @@ class AI_Administration
     public static function activateUserSite($user){
     }
 }
+
 ?>
-
-
