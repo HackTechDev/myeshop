@@ -77,22 +77,21 @@ class UsersoftwareController extends Zend_Controller_Action
 
                 $identity = Zend_Auth::getInstance()->getIdentity();
 
-                $version = 1; // Joomla application
-                $sitename = 'Mon test';
+                $version = 1; // By default : Joomla application
+                $sitename = $identity['login'] . " Website";
                 $user = $identity['login'];
                 $password = 'mot2passe';
-                $db = 'util22';
+                $db = $identity['login'];
                 $dbprefix = 'joomla';
                 $mailfrom = 'version01@mapetiteboutique.pro';
                 $fromname = 'Ma Petite Boutique Version01';
 
                 AI_Log::write('Create user: ' . $user);
-
                 AI_Administration::createUserSite("../../sites/" . $user);
-                //AI_Administration::createSqlUser($user, $password);
-                //AI_Administration::createUserDatabase($user);
-                //AI_Administration::setPermissionUserDatabase($user, $password);
-                //AI_SoftwareManagement::installSoftware($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname);
+                AI_Administration::createSqlUser($user, $password);
+                AI_Administration::createUserDatabase($user);
+                AI_Administration::setPermissionUserDatabase($user, $password);
+                AI_SoftwareManagement::installSoftware($version, $sitename, $user, $password, $db, $dbprefix, $mailfrom, $fromname);
 
                 // Send variable to the view
                 $this->view->softwareid = $this->getRequest()->getPost('softwareid');
