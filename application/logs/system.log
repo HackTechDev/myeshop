@@ -128,3 +128,10 @@
 2012-11-17T14:35:19+01:00 DEBUG (7): Install software for bwayne
 2012-11-17T14:40:09+01:00 DEBUG (7): Create user: bwayne
 2012-11-17T14:40:09+01:00 DEBUG (7): Install software for bwayne
+2012-11-17T14:51:45+01:00 DEBUG (7): Delete software #2 named 'Joomla1' for bwayne
+2012-11-17T14:53:14+01:00 DEBUG (7): Delete software #2 named 'Joomla1' for bwayne
+2012-11-17T14:55:14+01:00 DEBUG (7): Delete software #2 named 'Joomla1' for bwayne
+2012-11-17T14:55:49+01:00 DEBUG (7): Delete software #2 named 'Joomla1' for bwayne
+2012-11-17T15:58:27+01:00 DEBUG (7): Create user: bwayne
+2012-11-17T15:58:27+01:00 DEBUG (7): Install software for bwayne
+2012-11-17T16:00:34+01:00 DEBUG (7): Delete software #2 named 'Joomla1' for bwayne

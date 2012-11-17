@@ -52,7 +52,7 @@ class AI_Administration
      */
 
     public static function createUserDatabase($user){
-        
+
         $conn = new mysqli("localhost", "root", "mot2passe");
 
         if (mysqli_connect_errno()) {
@@ -74,7 +74,7 @@ class AI_Administration
      */
 
     public static function setPermissionUserDatabase($user, $password){
-        
+
 
         $conn = new mysqli("localhost", "root", "mot2passe");
 
@@ -96,7 +96,7 @@ class AI_Administration
      */
 
     public static function removeUserDatabase($user){
-        
+
 
         $conn = new mysqli("localhost", "root", "mot2passe");
 
@@ -117,9 +117,8 @@ class AI_Administration
        Remove software database by user
      */
 
-    public static function removeSoftwareDatabaseByUser($user, $password, $software){
+    public static function removeSoftwareTables($user, $password, $software){
         $conn = new mysqli("localhost", $user, $password);
-
         if (mysqli_connect_errno()) {
             exit('Connection failed'. mysqli_connect_error());
         }
@@ -132,12 +131,18 @@ class AI_Administration
             echo "Error: " . $conn->error;
         }
 
-        $sql = "DROP TABLE " . $software . "_* ;";
+        $sql = "SHOW tables FROM " . $user;
 
-        if ($conn->query($sql) === TRUE) {
-            echo "Software selected: " . $user . "<br/>";
-        } else {
-            echo "Error: " . $conn->error;
+        if ($result = $conn->query($sql)) {
+            while ($row = $result->fetch_row()) {
+                $sql1 = "DROP TABLE " . $row[0];
+                if ($conn->query($sql1) === TRUE) {
+                    echo "Table deleted: " . $row[0] . "<br/>";
+                } else {
+                    echo "Error: " . $conn->error;
+                }
+            }
+            $result->close();
         }
     }
 
@@ -145,7 +150,7 @@ class AI_Administration
        Remove User in database	
      */
     public static function removeUserInDatabase($user, $password){
-        
+
 
         $conn = new mysqli("localhost", "root", "mot2passe");
 
@@ -205,25 +210,25 @@ class AI_Administration
      */
 
     public static function deleteUserSite($usersite){
-         rmdir($usersite);       
+        rmdir($usersite);       
     }
 
     /*
-        Delete software
-    */
+       Delete software
+     */
 
-    public static function deleteSoftware($site) {	
-        if (is_dir ($site)) {
-            $dh = opendir ($site); 
+    public static function deleteSoftware($software) {	
+        if (is_dir ($software)) {
+            $dh = opendir ($software); 
         }else {     
             exit;
         }
 
         while (($file = readdir ($dh)) !== false ) { 
             if ($file !== '.' && $file !== '..') { 
-                $path = $site.'/'.$file;
+                $path = $software.'/'.$file;
                 if (is_dir ($path)) {           
-                    deleteSoftware($path); 
+                    AI_Administration::deleteSoftware($path); 
                     rmdir($path);
                 }else {   
                     unlink($path);

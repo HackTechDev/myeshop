@@ -68,14 +68,13 @@ class UsersoftwareController extends Zend_Controller_Action
                 $version = 1; // By default : Joomla application
                 $password = 'mot2passe';
                 $db = $identity['login'];
-                $dbprefix = 'joomla1';
+                $dbprefix = 'joomla';
  
-
                 // Remove the directory software 
-                
+                AI_Administration::deleteSoftware("../../sites/" . $user . "/software" . $version);
+                @rmdir("../../sites/" . $user . "/software" . $version);
                 // Remove the table software
-            
-
+                AI_Administration::removeSoftwareTables($user, $password, $dbprefix);
 
                 AI_Log::write("Delete software #" . $softwareid . " named '" . $softwarename['name'] . "' for " . $user);
                 $userssoftwares->deleteUserSoftware($id);
